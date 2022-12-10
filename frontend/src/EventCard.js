@@ -98,16 +98,34 @@ export default function Card({
                    title,
                    subtitle,
                    description,
-                   joined = false,
-               }) {
+                    event_id,
+                    user_id,
+                    reloadData,
+                    joined = false,
+               })
+{
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
     };
 
-    const handleClickButton = () => {
-
+    function handleClickButton(event_id, user_id, join = true) {
+        fetch(`http://127.0.0.1:5000/api/events/joinUser/?event_id=${event_id}&user_id=${user_id}&join=${!join}`,
+            {
+                headers: {
+                    "content_type": "application/json",
+                },
+                method: "GET",
+            })
+            .then((response) => response.json())
+            .then((data_) => {
+                if (data_ === true) {
+                    return true
+                }
+                // console.log(reloadData)
+                reloadData();
+            });
     };
 
     const handleClose = () => {
@@ -206,7 +224,7 @@ export default function Card({
                         <Item position={'middle-right'} onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
-                            handleClickButton()
+                            handleClickButton(event_id, user_id, joined === true);
                         }}>
                             <Button
                                 className={styles.join}
@@ -217,7 +235,7 @@ export default function Card({
                                 onClick={(e) => {
                                     e.preventDefault();
                                     e.stopPropagation();
-                                    handleClickButton()
+                                    handleClickButton(event_id, user_id, joined === true);
                                 }}
                             >
                                 {joined ? 'Не смогу' : 'Откликнуться'}

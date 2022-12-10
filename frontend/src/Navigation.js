@@ -18,9 +18,7 @@ export default function PrimaryNav (props)  {
     const [appState, setAppState] = useState({
             value: 0,
             data: [],
-
-        }
-    );
+    });
     const [filter, setFilter] = useState({
         filterValue: '["Granny"]',
         loading: true
@@ -28,29 +26,16 @@ export default function PrimaryNav (props)  {
     const handleChange = (event, value_) => {
         setAppState({data: appState.data, value: value_});
     };
-    useEffect(() => {
-        // if (filter.loading) {
-        //     fetch(`http://127.0.0.1:5000/api/events/eventFilter/?filters=${filter.filterValue}`,
-        //         {
-        //             headers: {
-        //                 "content_type": "application/json",
-        //             },
-        //             method: "GET",
-        //         })
-        //         .then((response) => response.json())
-        //         .then((data_) => {
-        //             console.log(data_);
-        //             setAppState({data: data_, value: appState.value})
-        //             setFilter({filterValue: filter.filterValue, loading: false})
-        //         });
-        // }
-    }, [])
     const navHeight = "56px";
+    let user_id = 1;
+    let reloadData = () => {
+        setFilter({filterValue: filter.filterValue, loading: true})
+    }
     let child = null;
     if (appState.value === 0) {
-        child = <Feed initFeedData={appState.data} setFilter={setFilter}/>;
+        child = <Feed initFeedData={appState.data} setFilter={setFilter} user_id={user_id} reloadData={reloadData}/>;
     } else {
-        child = <MapWithEdge places={appState.data} setFilter={setFilter}/>
+        child = <MapWithEdge places={appState.data} user_id={user_id} reloadData={reloadData}/>
     }
     if (filter.loading) {
         let user_id = 121212

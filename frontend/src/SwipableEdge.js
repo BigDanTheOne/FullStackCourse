@@ -59,7 +59,7 @@ const Puller = styled(Box)(({ theme }) => ({
     zIndex: 200
 }));
 
-export default function SwipableBottomPannel({places}) {
+export default function SwipableBottomPannel({places, user_id, reloadData}) {
     const filteredPlacesIDs = useSelector((state) => state.map.filteredPlaces);
     let filteredPlaces = [];
     for (let i = 0; i < places.length; i++) {
@@ -89,7 +89,7 @@ export default function SwipableBottomPannel({places}) {
                         {filteredPlaces.length} results
                     </Typography>
                 </div>
-                <TeamCard places = {filteredPlaces} slider={true}/>
+                <TeamCard places = {filteredPlaces} slider={true} user_id={user_id} reloadData={reloadData}/>
             </SwipeableBottomSheet>
         </div>
     )

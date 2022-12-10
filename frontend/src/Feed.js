@@ -138,31 +138,6 @@ const useStyles = makeStyles(() => ({
 
 export default function ResponsiveAppBar(props) {
     let dispatcher = useDispatch();
-    useEffect(() => {
-        // fetch(`http://127.0.0.1:5000/api/events/eventFilter/?filters=${filter}`,
-        //     {
-        //         headers:{
-        //             "content_type": "application/json",
-        //         },
-        //         method: "GET",
-        //     })
-        //     .then((response) => response.json())
-        //     .then((data) => {console.log(data); feedData = data});
-        // let EventIds = new Set()
-        // for (let feedData of props.initFeedData){
-        //     console.log("initFeedData: ", props.initFeedData )
-        //     EventIds.add(feedData['id'])
-        // }
-        // EventIds = JSON.stringify([...EventIds])
-        // fetch(`http://127.0.0.1:5000//api/events/getEventsMembers/?EventIds=${EventIds}`,
-        //     {
-        //         headers:{
-        //             "content_type":"application/json",
-        //         },
-        //     })
-        //     .then((response) => response.json())
-        //     .then((data) => {console.log(data); dispatcher(addUsers(data))});
-    }, []);
     const fetchFeed = async (Category = '["Granny"]') => {}
 
     const [value, setValue] = React.useState(0);
@@ -317,9 +292,7 @@ export default function ResponsiveAppBar(props) {
                     }/>
                 </Tabs>
             </Box>
-            <TeamCard
-                places = {props.initFeedData}
-            />
+            <TeamCard places = {props.initFeedData} slider={false} user_id={props.user_id} reloadData={props.reloadData}/>
         </StyledBox>
     </React.Fragment>);
 }

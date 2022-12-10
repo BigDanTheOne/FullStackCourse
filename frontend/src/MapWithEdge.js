@@ -11,7 +11,9 @@ function MapWithEdge(props){
                 places={props.places} dispatcher={dispatcher}
             >
                 <Edge
-                    places={props.places} dispatcher={dispatcher}
+                    places={props.places}
+                    user_id={props.user_id}
+                    reloadData={props.reloadData}
                 />
             </Map>
     )
